@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e9c99d4ff788e43b9d503d693f81ae, type: 3}
+  m_Name: ArcherStats
+  m_EditorClassIdentifier: 
+  _cooldownAttack: 3
+  _maxDistance: 3
+  _maxLife: 7
+  _playerArrowDamage: 1
+  _percentageChanceToDropItem: 75
+  _attackSound:
+  - {fileID: 8300000, guid: 9795c419a045f5a48a0e3ad2cbd95eef, type: 3}
+  - {fileID: 8300000, guid: a01773f74f64d104d9c44289008431d5, type: 3}
+  _deathSound:
+  - {fileID: 8300000, guid: fd1f193bdd19bc340a9c994a955b0725, type: 3}
+  _damageSounds:
+  - {fileID: 8300000, guid: fd1f193bdd19bc340a9c994a955b0725, type: 3}
+  - {fileID: 8300000, guid: 5d3125a3037821a46afa414982661ecd, type: 3}

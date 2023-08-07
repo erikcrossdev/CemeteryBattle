@@ -19,8 +19,8 @@ namespace PainfulTest.Manager
         [Header("Text Componets")]
         [Space(5)]
 
-        public TMPro.TextMeshProUGUI TimerText;
-        public TMPro.TextMeshProUGUI ArrowAmount;
+        [SerializeField] protected TMPro.TextMeshProUGUI _timerText;
+        [SerializeField] protected TMPro.TextMeshProUGUI _arrowAmount;
 
         public UnityEvent OnArrowUpdate;
 
@@ -55,14 +55,14 @@ namespace PainfulTest.Manager
             string _minutes = Math.Floor(Timer / 60).ToString("00");
             string _seconds = Math.Floor(Timer % 60).ToString("00");
 
-            TimerText.text = string.Concat(_minutes, ":", _seconds);
+            _timerText.text = string.Concat(_minutes, ":", _seconds);
 
            
         }
 
         void UpdateUI()
         {
-            ArrowAmount.text = Player.ShootingBehaviour.Instance._currentAmmo.ToString();
+            _arrowAmount.text = Player.ShootingBehaviour.Instance._currentAmmo.ToString();
         }
 
     }

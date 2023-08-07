@@ -13,40 +13,39 @@ namespace PainfulTest.Enemy
         protected override void Start()
         {
             base.Start();
+            StartCoroutine(AttackPlayerRoutine());
         }
 
         protected override void Update()
         {
-            base.Update();
-            if (CanAttackPlayer)
-                AttackPlayer();
+            base.Update();           
         }
 
+        //This function is called in a animation Event so the animation frame can be synced
         public void Hit()
         {
-            Vector3 directionToPlayer = transform.position - Target.position;
+            Vector3 directionToPlayer = transform.position - _target.position;
             float Angle = Vector3.Angle(transform.position, directionToPlayer);
             float distance = directionToPlayer.magnitude;
             if (Mathf.Abs(Angle) <= 90 || distance <= 90)
             {
                 Player.PlayerHealth.TakePlayerDamage.Invoke();
             }
-            _source.PlayOneShot(AttackSound);
+            _stats.PlayRandomSFX(_source, _stats.AttackSound);
         }
-
-        void AttackPlayer()
+        private IEnumerator AttackPlayerRoutine()
         {
-            if (_distanceBetweenTarget <= _agent.stoppingDistance)
+            while (!_isDead)
             {
-                CooldownTimer += Time.deltaTime;
-            }
-
-            if (CooldownTimer >= CooldownAttack)
-            {
-                _anim.SetTrigger(_triggerAttack);
-                transform.LookAt(Target);
-                CooldownTimer = 0;
+                if (_distanceBetweenTarget <= _agent.stoppingDistance)
+                {
+                    yield return new WaitForSeconds(_stats.CooldownAttack);
+                    _anim.SetTrigger(_triggerAttack);
+                    transform.LookAt(_target);
+                }
+                yield return null;
             }
         }
+
     }
 }

@@ -12,31 +12,23 @@ namespace PainfulTest.Enemy
     [RequireComponent(typeof(Animator))]
     public class Enemy : MonoBehaviour, Characters.IDamageable
     {
-        public GameObject EnemyMesh;
-        public GameObject Particle;
-        public List<GameObject> ItemsToDrop = new List<GameObject>();
-        [Range(0.0f, 100.0f)]
-        public float PercentageChanceToDropItem;
+        [SerializeField] protected GameObject _enemyMesh;
+        [SerializeField] protected GameObject _particle;
+        [SerializeField] protected List<GameObject> _itemsToDrop = new List<GameObject>();
+      
 
-        public Transform Target;
+        protected Transform _target;
         protected Animator _anim;
 
-        #region AudioClips
-        [Header("Audio Clips")]
-        [Space(5)]
-        public AudioClip AttackSound;
-        public AudioClip DeathSound;
-        public AudioClip[] DamageSounds;
-        #endregion
+        [SerializeField] protected EnemyStats _stats;
+
 
         #region Attack
         [Header("Attack Parameters")]
-        public float CooldownAttack;
-        public bool CanFollowPlayer;
-        public bool CanAttackPlayer;
+        [SerializeField] protected bool _canFollowPlayer;
+        [SerializeField] protected bool _canAttackPlayer;
         #endregion
-
-        public float MaxDistance;
+              
         protected Vector3 _destination;
         protected NavMeshAgent _agent;
         protected AudioSource _source;
@@ -48,22 +40,12 @@ namespace PainfulTest.Enemy
 
         #endregion
 
-
-        [Range(5, 10)]
-        public int MaxLife = 5;
-
         protected int _currentLife;
-
-        [Range(5, 10)]
-        public int PlayerArrowDamage = 1;
-
-
         protected float WalkSpeed;
         protected float _distanceBetweenTarget;
-        protected float CooldownTimer;
-        protected bool isDead;
+        protected bool _isDead;
 
-        public float EnterTheGroundTime = 2f;
+        [SerializeField] protected float EnterTheGroundTime = 2f;
         protected float _groundTimer = 2f;
 
         protected const string _triggerWalk = "walk";
@@ -74,21 +56,20 @@ namespace PainfulTest.Enemy
         {
             _anim = GetComponent<Animator>();
             _agent = GetComponent<NavMeshAgent>();
-            Target = Player.FPSCharacterController.Instance.PlayerTransform;
+            _target = Player.FPSCharacterController.Instance.PlayerTransform;
             _source = GetComponent<AudioSource>();
-            CooldownTimer = 0;
+           
+            _canAttackPlayer = true;
 
-            CanAttackPlayer = true;
+            _isDead = false;
 
-            isDead = false;
-
-            _currentLife = MaxLife;
+            _currentLife = _stats.MaxLife;
         }
 
         protected virtual void Update()
         {
             FollowPlayer();
-            if (isDead)
+            if (_isDead)
             {
                 EnterTheGround();
             }
@@ -96,33 +77,30 @@ namespace PainfulTest.Enemy
 
         protected void FollowPlayer()
         {
-            if (CanFollowPlayer && !isDead)
+            if (_canFollowPlayer && !_isDead)
             {
-                _distanceBetweenTarget = Vector3.Distance(transform.position, Target.position);
-                if (_distanceBetweenTarget > MaxDistance && !isDead)
+                _distanceBetweenTarget = Vector3.Distance(transform.position, _target.position);
+                if (_distanceBetweenTarget > _stats.MaxDistance && !_isDead)
                 {
                     NavMeshHit hit;
-                    if (NavMesh.SamplePosition(Target.position, out hit, MaxDistance, ~0))
+                    if (NavMesh.SamplePosition(_target.position, out hit, _stats.MaxDistance, ~0))
                     {
                         _destination = hit.position;
                         _agent.destination = _destination;
                     }
 
                     WalkSpeed = _agent.velocity.magnitude;
-                    if (CooldownTimer < CooldownAttack)
-                    {
-                        _anim.SetFloat(_triggerWalk, WalkSpeed);
-                    }
+                    _anim.SetFloat(_triggerWalk, WalkSpeed);
                 }
             }
         }
 
         protected void KillEnemy()
         {
-            isDead = true;
-            CanFollowPlayer = false;
-            _anim.SetBool(_triggerDead, isDead);
-            _source.PlayOneShot(DeathSound);
+            _isDead = true;
+            _canFollowPlayer = false;
+            _anim.SetBool(_triggerDead, _isDead);
+            _stats.PlayRandomSFX(_source, _stats.DeathSound);
             Manager.SpawnManager.RemoveEnemy.Invoke();
             Manager.ScoreManager.CallOnAddScore();
 
@@ -131,10 +109,10 @@ namespace PainfulTest.Enemy
 
         protected void DropLoot() {
             float dropChance = Random.Range(0, 100);
-            Instantiate(Particle, transform.position, transform.rotation);
-            if (dropChance <= PercentageChanceToDropItem)
+            Instantiate(_particle, transform.position, transform.rotation);
+            if (dropChance <= _stats.PercentageChanceToDropItem)
             {
-                Instantiate(ItemsToDrop[Random.Range(0, ItemsToDrop.Count)], new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z), transform.rotation);
+                Instantiate(_itemsToDrop[Random.Range(0, _itemsToDrop.Count)], new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z), transform.rotation);
             }
 
         }
@@ -144,7 +122,7 @@ namespace PainfulTest.Enemy
             _groundTimer += Time.deltaTime;
             if (_groundTimer >= EnterTheGroundTime)
             {
-                EnemyMesh.transform.Translate(new Vector3(0, -2 * Time.deltaTime, 0));
+                _enemyMesh.transform.Translate(new Vector3(0, -2 * Time.deltaTime, 0));
             }
         }
 
@@ -166,10 +144,8 @@ namespace PainfulTest.Enemy
             if (_currentLife > 0)
             {
                 _anim.SetTrigger(_triggerHit);
-                _currentLife -= PlayerArrowDamage;
-                int randIndex = Random.Range(0, DamageSounds.Length);
-                if (!_source.isPlaying)
-                    _source.PlayOneShot(DamageSounds[randIndex]);
+                _currentLife -= _stats.PlayerArrowDamage;
+                _stats.PlayRandomSFX(_source, _stats.DamageSounds);
             }
             else
             {
@@ -186,6 +162,15 @@ namespace PainfulTest.Enemy
             }
         }
 
+        public void CanAttackPlayerSetter(bool value) {
+            _canAttackPlayer = value;
+        }
+
+        public void CanFollowPlayerSetter(bool value)
+        {
+            _canFollowPlayer = value;
+        }
+
         private void OnEnable()
         {
             OnEnemyDeath += KillEnemy;
@@ -197,5 +182,8 @@ namespace PainfulTest.Enemy
             OnEnemyDeath -= KillEnemy;
             OnEnemyDeath -= DropLoot;
         }
+
+
     }
+
 }

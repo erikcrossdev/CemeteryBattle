@@ -100,8 +100,8 @@ namespace PainfulTest.Manager
         {
             foreach (Enemy.Enemy enemy in EnemiesInstantiated)
             {
-                enemy.CanAttackPlayer = false;
-                enemy.CanFollowPlayer = false;
+                enemy.CanAttackPlayerSetter(false);
+                enemy.CanFollowPlayerSetter(false);
             }
 
         }

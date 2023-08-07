@@ -7,44 +7,44 @@ namespace PainfulTest.Enemy
 {
     public class ArcherEnemy : Enemy
     {
-        public GameObject Arrow;
-        public GameObject Bow;
+        [SerializeField] protected GameObject _arrow;
+        [SerializeField] protected GameObject _bow;
         private const string _triggerReload = "reload";
-     
+
         protected override void Start()
         {
             base.Start();
+            StartCoroutine(AttackPlayerRoutine());
         }
 
         protected override void Update()
         {
             base.Update();
-            if (CanAttackPlayer)
-                AttackPlayer();
         }
 
+
+        //This function is called in a animation Event so the animation frame can be synced
         public void Shoot()
-        {           
-            _source.PlayOneShot(AttackSound);
-            Instantiate(Arrow, Bow.transform.position, Bow.transform.rotation);
-        }
-
-
-        void AttackPlayer()
         {
-            if (_distanceBetweenTarget <= _agent.stoppingDistance)
-            {
-                CooldownTimer += Time.deltaTime;
-            }
+            _stats.PlayRandomSFX(_source, _stats.AttackSound);
+            Instantiate(_arrow, _bow.transform.position, _bow.transform.rotation);
+        }
 
-            if (CooldownTimer >= CooldownAttack)
-            {
-                _anim.SetTrigger(_triggerReload);
-                Bow.transform.LookAt(Target);
-                transform.LookAt(Target);
-                CooldownTimer = 0;
-
+        private IEnumerator AttackPlayerRoutine()
+        {
+            while (!_isDead)
+            {                
+                if (_distanceBetweenTarget <= _agent.stoppingDistance)
+                {
+                    yield return new WaitForSeconds(_stats.CooldownAttack);
+                    _anim.SetTrigger(_triggerReload);
+                    _bow.transform.LookAt(_target);
+                    transform.LookAt(_target);
+                }
+                yield return null;
             }
         }
+
+
     }
 }

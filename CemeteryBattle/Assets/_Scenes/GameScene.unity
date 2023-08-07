@@ -3723,7 +3723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &326645693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4100,7 +4100,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1266905189603444, guid: ba9a7933f06917845a1bf8e5f6474dfb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224818016506929524, guid: ba9a7933f06917845a1bf8e5f6474dfb,
         type: 3}
@@ -9417,8 +9417,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Timer: 0
-  TimerText: {fileID: 1141516430}
-  ArrowAmount: {fileID: 324726243}
+  _timerText: {fileID: 1141516430}
+  _arrowAmount: {fileID: 324726243}
   OnArrowUpdate:
     m_PersistentCalls:
       m_Calls: []
@@ -9894,7 +9894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemies:
   - {fileID: 114889149125069498, guid: 00fd927fd224d2042a33fc9fca06475c, type: 3}
-  - {fileID: 114569283524098616, guid: 4fbd91d06dce70d429209840a1c6bf72, type: 3}
+  - {fileID: 114569283524098616, guid: af573683b7c265a468d87297d34356b6, type: 3}
   - {fileID: 114889149125069498, guid: 6886afab4df25ad41abe1b4a07eec2ad, type: 3}
   - {fileID: 114569283524098616, guid: 92cb965e55c42b149b2822cd5e664e78, type: 3}
   - {fileID: 114889149125069498, guid: 49c5afbe59551f943926b75f6ddfea4a, type: 3}
@@ -14305,7 +14305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1354850860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15613,7 +15613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1440709020
 MonoBehaviour:
   m_ObjectHideFlags: 0
