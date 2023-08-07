@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using PainfulTest.Characters;
 using UnityEngine;
 using UnityEngine.AI;
+using PainfulTest.Manager;
 
 namespace PainfulTest.Enemy
 {
@@ -43,7 +44,7 @@ namespace PainfulTest.Enemy
         #region Events
 
         public delegate void EnemyDeath();
-        public static event EnemyDeath OnEnemyDeath;
+        private event EnemyDeath OnEnemyDeath;
 
         #endregion
 
@@ -87,7 +88,6 @@ namespace PainfulTest.Enemy
         protected virtual void Update()
         {
             FollowPlayer();
-            CheckLife();
             if (isDead)
             {
                 EnterTheGround();
@@ -117,27 +117,26 @@ namespace PainfulTest.Enemy
             }
         }
 
-        protected void CheckLife()
+        protected void KillEnemy()
         {
-            if (_currentLife <= 0 && !isDead)
+            isDead = true;
+            CanFollowPlayer = false;
+            _anim.SetBool(_triggerDead, isDead);
+            _source.PlayOneShot(DeathSound);
+            Manager.SpawnManager.RemoveEnemy.Invoke();
+            Manager.ScoreManager.CallOnAddScore();
+
+            Destroy(gameObject, 5);           
+        }
+
+        protected void DropLoot() {
+            float dropChance = Random.Range(0, 100);
+            Instantiate(Particle, transform.position, transform.rotation);
+            if (dropChance <= PercentageChanceToDropItem)
             {
-                isDead = true;
-                CanFollowPlayer = false;
-                _anim.SetBool(_triggerDead, isDead);
-                _source.PlayOneShot(DeathSound);
-                Manager.SpawnManager.RemoveEnemy.Invoke();
-                float dropChance = Random.Range(0, 100);
-                Instantiate(Particle, transform.position, transform.rotation);
-                if (dropChance <= PercentageChanceToDropItem)
-                {
-                    Instantiate(ItemsToDrop[Random.Range(0, ItemsToDrop.Count)], new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z), transform.rotation);
-                }
-                Destroy(gameObject, 5);
-                if (OnEnemyDeath != null)
-                {
-                    OnEnemyDeath();
-                }
+                Instantiate(ItemsToDrop[Random.Range(0, ItemsToDrop.Count)], new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z), transform.rotation);
             }
+
         }
 
         public void EnterTheGround()
@@ -172,6 +171,31 @@ namespace PainfulTest.Enemy
                 if (!_source.isPlaying)
                     _source.PlayOneShot(DamageSounds[randIndex]);
             }
+            else
+            {
+                CallOnEnemyDeath();
+            }
+        }
+
+        private void CallOnEnemyDeath()
+        {
+            if (OnEnemyDeath != null)
+            {
+                OnEnemyDeath();
+                OnEnemyDeath = null;
+            }
+        }
+
+        private void OnEnable()
+        {
+            OnEnemyDeath += KillEnemy;
+            OnEnemyDeath += DropLoot;
+        }
+
+        private void OnDisable()
+        {
+            OnEnemyDeath -= KillEnemy;
+            OnEnemyDeath -= DropLoot;
         }
     }
 }

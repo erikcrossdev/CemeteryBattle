@@ -23,12 +23,22 @@ namespace PainfulTest.Manager
             get; private set;
         }
 
+        public delegate void AddScoreEvent();
+        public static event AddScoreEvent OnAddScore;
+
         void Awake()
         {
             Instance = this;
             CurrentScore = EnemiesKilled = 0;
             UpdateScoreText();
 
+        }
+
+        public static void CallOnAddScore() {
+            if (OnAddScore != null) {
+                OnAddScore();
+            }
+        
         }
 
         public void AddScore()
@@ -46,11 +56,11 @@ namespace PainfulTest.Manager
 
         private void OnEnable()
         {
-            Enemy.Enemy.OnEnemyDeath += AddScore;
+            OnAddScore += AddScore;
         }
         private void OnDisable()
         {
-            Enemy.Enemy.OnEnemyDeath -= AddScore;
+            OnAddScore -= AddScore;
         }
     }
 }
