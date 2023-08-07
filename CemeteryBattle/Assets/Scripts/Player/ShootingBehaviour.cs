@@ -12,32 +12,33 @@ using UnityEngine;
         [Header("Shooting Parameters")]
         [Space(5)]
 
-        [Range(10, 100)]
-        public int InitialAmmo;
+        [SerializeField, Range(10, 100)]
+        private int _initialAmmo;
 
-        public int PackAmmoValue;
+        [SerializeField, Range(10, 100)]
+        private int _packAmmoValue;
 
         public int _currentAmmo { get; private set; }
 
-        [Range(0.01f, 2.0f)]
-        public float Cadency;
+        [SerializeField, Range(0.01f, 2.0f)]
+        private float Cadency;
         private float _timer;
 
-        public GameObject Bow;
-        public GameObject Arrow;
+        [SerializeField] private GameObject _bow;
+        [SerializeField] private GameObject _arrow;
 
         [Header("Audio Clips")]
         [Space(5)]
 
         protected AudioSource _source;
-    
-        public AudioClip Shoot;
+
+        [SerializeField] protected AudioClip _shoot;
        
 
         private void Awake()
         {
             Instance = this;
-            _currentAmmo = InitialAmmo;
+            _currentAmmo = _initialAmmo;
         }
 
         public void Start()
@@ -57,8 +58,8 @@ using UnityEngine;
 
                 if (Input.GetKeyDown(KeyCode.Mouse0) && _timer > Cadency && _currentAmmo > 0 && !Settings.PauseMenu.Instance.IsPaused)
                 {
-                    _source.PlayOneShot(Shoot);
-                    Instantiate(Arrow, Bow.transform.position, Bow.transform.rotation);
+                    _source.PlayOneShot(_shoot);
+                    Instantiate(_arrow, _bow.transform.position, _bow.transform.rotation);
                     _currentAmmo--;
                     Manager.MatchManager.Instance.OnArrowUpdate.Invoke();
                     _timer = 0;
@@ -71,7 +72,7 @@ using UnityEngine;
             if (other.gameObject.GetComponent<Items.CollectableItem>()!=null && other.gameObject.GetComponent<Items.CollectableItem>().Type==Items.CollectableType.ArrowPack)
             {
                 Items.CollectableItem arrow = other.gameObject.GetComponent<Items.CollectableItem>();
-                _currentAmmo += PackAmmoValue;
+                _currentAmmo += _packAmmoValue;
                 Destroy(other.gameObject);
                 Manager.MatchManager.Instance.OnArrowUpdate.Invoke();
             }

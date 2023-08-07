@@ -11,28 +11,28 @@ namespace PainfulTest.Player
     {
         public static PlayerHealth Instance;
 
-        [Range(10.0f, 110.0f)]
-        public float InitialHealth;
+        [SerializeField, Range(10.0f, 110.0f)]
+        private float _initialHealth;
 
-        [Range(1, 110)]
-        public float HealthPackRecoverValue;
+        [SerializeField, Range(1, 110)]
+        private float _healthPackRecoverValue;
 
         public float CurrentHealth { get; private set; }
 
-        public float MinDamage;
-        public float MaxDamage;
+        [SerializeField] private float _minDamage;
+        [SerializeField] private float _maxDamage;
 
         private float _damageAlpha;
         public bool IsDead { get; private set; }
 
-        public Image DamageUI;
+        [SerializeField] private Image _damageUI;
 
         private AudioSource _source;
 
         [Header("Audio Clips")]
         [Space(5)]
-        public AudioClip RecoverLife;
-        public AudioClip DamageClip;
+        [SerializeField] private AudioClip _recoverLife;
+        [SerializeField] private AudioClip _damageClip;
 
 
         public static UnityEvent TakePlayerDamage;
@@ -44,25 +44,25 @@ namespace PainfulTest.Player
         void Start()
         {
             _source = GetComponent<AudioSource>();
-            CurrentHealth = InitialHealth;
+            CurrentHealth = _initialHealth;
 
             if (TakePlayerDamage == null)
             {
                 TakePlayerDamage = new UnityEvent();
             }
             TakePlayerDamage.AddListener(TakeDamage);
-            DamageUI.color = new Color(1, 1, 1, 0);
+            _damageUI.color = new Color(1, 1, 1, 0);
         }
 
         public void TakeDamage()
         {
             if (CurrentHealth > 0)
             {
-                _source.PlayOneShot(DamageClip);
-                float damage = Random.Range(MinDamage, MaxDamage);
+                _source.PlayOneShot(_damageClip);
+                float damage = Random.Range(_minDamage, _maxDamage);
                 CurrentHealth -= damage;
-                _damageAlpha += (damage / InitialHealth);
-                DamageUI.color = new Color(1, 1, 1, _damageAlpha);
+                _damageAlpha += (damage / _initialHealth);
+                _damageUI.color = new Color(1, 1, 1, _damageAlpha);
             }
 
             if (CurrentHealth <= 0) {
@@ -73,10 +73,10 @@ namespace PainfulTest.Player
         }
 
         private void RecoverHealth(GameObject other) {
-            _source.PlayOneShot(RecoverLife);
-            CurrentHealth += HealthPackRecoverValue;
-            _damageAlpha -= (HealthPackRecoverValue / InitialHealth);
-            DamageUI.color = new Color(1, 1, 1, _damageAlpha);
+            _source.PlayOneShot(_recoverLife);
+            CurrentHealth += _healthPackRecoverValue;
+            _damageAlpha -= (_healthPackRecoverValue / _initialHealth);
+            _damageUI.color = new Color(1, 1, 1, _damageAlpha);
            
         }
 

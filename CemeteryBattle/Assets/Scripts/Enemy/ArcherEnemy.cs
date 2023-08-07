@@ -44,7 +44,5 @@ namespace PainfulTest.Enemy
                 yield return null;
             }
         }
-
-
     }
 }

@@ -9,8 +9,8 @@ namespace PainfulTest.Manager
     {
         public static ScoreManager Instance { get; private set; }
 
-        [Range(5, 10)]
-        public int ScorePerEnemyKilled;
+        [SerializeField, Range(5, 10)]
+        public int _scorePerEnemyKilled;
         public int CurrentScore      
         {
             get; private set;
@@ -42,7 +42,7 @@ namespace PainfulTest.Manager
 
         public void AddScore()
         {
-            CurrentScore += ScorePerEnemyKilled;
+            CurrentScore += _scorePerEnemyKilled;
             EnemiesKilled++;
             UpdateScoreText();
         }

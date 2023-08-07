@@ -56,8 +56,6 @@ namespace PainfulTest.Manager
             string _seconds = Math.Floor(Timer % 60).ToString("00");
 
             _timerText.text = string.Concat(_minutes, ":", _seconds);
-
-           
         }
 
         void UpdateUI()

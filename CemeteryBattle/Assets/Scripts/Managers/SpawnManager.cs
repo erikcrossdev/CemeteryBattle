@@ -13,22 +13,21 @@ namespace PainfulTest.Manager
     {
         public static SpawnManager Instance;
 
-        public List<Enemy.Enemy> Enemies = new List<Enemy.Enemy>();
+        [SerializeField] private List<Enemy.Enemy> _enemies = new List<Enemy.Enemy>();
 
-        public List<Enemy.Enemy> EnemiesInstantiated = new List<Enemy.Enemy>();
+        [SerializeField] private List<Enemy.Enemy> EnemiesInstantiated = new List<Enemy.Enemy>();
 
-        public int MaxEnemiesInstantiated;
+        [SerializeField] private int _maxEnemiesInstantiated;
         private int _currentEnemiesInstantiated;
 
-        public float InstantiateTimer;
-        private float _timer;
+        [SerializeField] private float _instantiateTimer;
 
 
-        [Range(3, 10)]
-        public float StartConterTime;
+        [SerializeField, Range(3, 10)]
+        private float StartConterTime;
         private float _startTimer;
 
-        public List<GameObject> SpawnPoints = new List<GameObject>();
+        [SerializeField] private List<GameObject> _spawnPoints = new List<GameObject>();
 
         public static UnityEvent RemoveEnemy;
 
@@ -36,7 +35,7 @@ namespace PainfulTest.Manager
 
         private bool CanSpawn;
 
-      
+
         void Awake()
         {
             Instance = this;
@@ -52,6 +51,11 @@ namespace PainfulTest.Manager
             RemoveEnemy.AddListener(EnemyRemoved);
         }
 
+        private void Start()
+        {
+            StartCoroutine(SpawnEnemies());
+        }
+
         void Update()
         {
             if (_startTimer >= 0)
@@ -64,22 +68,22 @@ namespace PainfulTest.Manager
                 CountDownTimer.enabled = false;
                 CanSpawn = true;
             }
-
-            if (CanSpawn)
+           
+        }
+        private IEnumerator SpawnEnemies()
+        {
+            while (!Player.PlayerHealth.Instance.IsDead)
             {
-                _timer += Time.deltaTime;
-            } 
-            if (_timer >= InstantiateTimer)
-            {
-                if (_currentEnemiesInstantiated <= MaxEnemiesInstantiated && !Player.PlayerHealth.Instance.IsDead)
+                if (_currentEnemiesInstantiated <= _maxEnemiesInstantiated && CanSpawn)
                 {
-                    Enemy.Enemy enemy = Instantiate(Enemies[Random.Range(0, Enemies.Count)],
-                    SpawnPoints[Random.Range(0, SpawnPoints.Count)].transform.position,
-                    SpawnPoints[Random.Range(0, SpawnPoints.Count)].transform.rotation);
+                    yield return new WaitForSeconds(_instantiateTimer);
+                    Enemy.Enemy enemy = Instantiate(_enemies[Random.Range(0, _enemies.Count)],
+                     _spawnPoints[Random.Range(0, _spawnPoints.Count)].transform.position,
+                     _spawnPoints[Random.Range(0, _spawnPoints.Count)].transform.rotation);
                     EnemiesInstantiated.Add(enemy);
                     _currentEnemiesInstantiated++;
                 }
-                _timer = 0;
+                yield return null;
             }
         }
 

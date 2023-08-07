@@ -38,8 +38,6 @@ namespace PainfulTest.Settings
             {
                 ResumePauseGame();
             }
-
-            
         }
 
         public void ResumePauseGame()
@@ -48,7 +46,6 @@ namespace PainfulTest.Settings
             PauseUI.SetActive(IsPaused);
             SetPauseActivation();
         }
-
 
         void SetPauseActivation()
         {

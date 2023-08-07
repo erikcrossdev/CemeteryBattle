@@ -868,7 +868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67287e28f07daf548b7c5b08ad6488bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScorePerEnemyKilled: 10
+  _scorePerEnemyKilled: 10
   ScoreText: {fileID: 1652570206}
 --- !u!4 &76398819
 Transform:
@@ -3834,8 +3834,8 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 326645692}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
+  m_Alpha: 0
+  m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!114 &326645699
@@ -4926,9 +4926,9 @@ PrefabInstance:
       objectReference: {fileID: 527736459}
     - target: {fileID: 114728032228411654, guid: 60df025ee84f85d408047779c416be30,
         type: 3}
-      propertyPath: RecoverLife
+      propertyPath: _damageUI
       value: 
-      objectReference: {fileID: 8300000, guid: 1c5d0eac5167c124a9b247f705cde2b3, type: 3}
+      objectReference: {fileID: 527736459}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60df025ee84f85d408047779c416be30, type: 3}
 --- !u!1001 &382652272
@@ -9892,7 +9892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d96eaeb02a36647a878c9b990385ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemies:
+  _enemies:
   - {fileID: 114889149125069498, guid: 00fd927fd224d2042a33fc9fca06475c, type: 3}
   - {fileID: 114569283524098616, guid: af573683b7c265a468d87297d34356b6, type: 3}
   - {fileID: 114889149125069498, guid: 6886afab4df25ad41abe1b4a07eec2ad, type: 3}
@@ -9906,10 +9906,10 @@ MonoBehaviour:
   - {fileID: 114889149125069498, guid: 708add26d3173814aa4aec16ad280162, type: 3}
   - {fileID: 114569283524098616, guid: 3a94934c763b7b64e80ce63436da6cce, type: 3}
   EnemiesInstantiated: []
-  MaxEnemiesInstantiated: 15
-  InstantiateTimer: 3
+  _maxEnemiesInstantiated: 15
+  _instantiateTimer: 3
   StartConterTime: 3
-  SpawnPoints:
+  _spawnPoints:
   - {fileID: 706657776}
   - {fileID: 1729541800}
   - {fileID: 447183199}
