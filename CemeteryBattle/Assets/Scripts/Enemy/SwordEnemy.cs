@@ -32,6 +32,7 @@ namespace PainfulTest.Enemy
                 Player.PlayerHealth.TakePlayerDamage.Invoke();
             }
             _stats.PlayRandomSFX(_source, _stats.AttackSound);
+            _canAttackPlayer = true;
         }
         private IEnumerator AttackPlayerRoutine()
         {

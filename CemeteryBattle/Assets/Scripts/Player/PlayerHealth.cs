@@ -40,12 +40,11 @@ namespace PainfulTest.Player
         private void Awake()
         {
             Instance = this;
+            _source = GetComponent<AudioSource>();
+            CurrentHealth = _initialHealth;
         }
         void Start()
         {
-            _source = GetComponent<AudioSource>();
-            CurrentHealth = _initialHealth;
-
             if (TakePlayerDamage == null)
             {
                 TakePlayerDamage = new UnityEvent();

@@ -12,7 +12,8 @@ namespace PainfulTest.Manager
     {
         public static MatchManager Instance;
 
-        public float Timer;
+        [SerializeField] private float _timer = 180;
+        public float Timer => _timer;
 
         public bool TimeIsUp { get; private set; }
 
@@ -31,8 +32,10 @@ namespace PainfulTest.Manager
             {
                 //Default value: 3:00"
                 PlayerPrefs.SetFloat("Timer", 180);
+                Debug.LogError("Setting float to 180 ");
             }
-            Timer = PlayerPrefs.GetFloat("Timer");
+            _timer = PlayerPrefs.GetFloat("Timer");
+            Debug.LogError("Timer from player prefs is " + PlayerPrefs.GetFloat("Timer"));
 
             OnArrowUpdate.AddListener(UpdateUI);
 
@@ -41,16 +44,16 @@ namespace PainfulTest.Manager
 
         void Update()
         {
-            if (Timer > 0)
+            if (_timer > 0)
             {
-                Timer -= Time.deltaTime;
+                _timer -= Time.deltaTime;
             }
             if (Timer <= 0)
             {
                 TimeIsUp = true;
                 StatisticsManager.Instance.ShowStatistics();
                 SpawnManager.Instance.FreezeAllEnemies();
-                Timer = 0;
+                _timer = 0;
             }
             string _minutes = Math.Floor(Timer / 60).ToString("00");
             string _seconds = Math.Floor(Timer % 60).ToString("00");

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ArcherStats
   m_EditorClassIdentifier: 
   _cooldownAttack: 3
-  _maxDistance: 3
+  _maxDistance: 5
   _maxLife: 7
   _playerArrowDamage: 1
   _percentageChanceToDropItem: 75

@@ -25,7 +25,7 @@ namespace PainfulTest.Settings
         [Space(5)]
         [Header("Default Values")]
         [Space(10)]
-
+        [SerializeField, Range(60, 110)]
         private float _countdown;
 
         [Space(5)]

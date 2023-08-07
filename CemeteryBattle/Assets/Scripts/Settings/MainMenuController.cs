@@ -11,7 +11,7 @@ namespace PainfulTest.Settings
         private const string _triggerON = "On";
         private const string _triggerOFF = "Off";
 
-      
+
         public void BackToMainMenu()
         {
             SettingsAnim.SetTrigger(_triggerOFF);

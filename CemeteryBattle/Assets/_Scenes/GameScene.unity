@@ -9416,7 +9416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55e0b9895485053488c400c42a568e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Timer: 0
+  Timer: 180
   _timerText: {fileID: 1141516430}
   _arrowAmount: {fileID: 324726243}
   OnArrowUpdate:
