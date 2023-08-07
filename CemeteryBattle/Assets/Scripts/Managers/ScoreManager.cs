@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace PainfulTest.Manager
-{
-
-    public class ScoreManager : MonoBehaviour
+{    public class ScoreManager : MonoBehaviour
     {
         public static ScoreManager Instance { get; private set; }
 
@@ -17,7 +16,7 @@ namespace PainfulTest.Manager
             get; private set;
         }
 
-        public Text ScoreText;
+        public TMPro.TextMeshProUGUI ScoreText;
 
         public int EnemiesKilled {
             get; private set;

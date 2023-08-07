@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 namespace PainfulTest.Manager
 {
@@ -18,8 +19,8 @@ namespace PainfulTest.Manager
         [Header("Text Componets")]
         [Space(5)]
 
-        public Text TimerText;
-        public Text ArrowAmount;
+        public TMPro.TextMeshProUGUI TimerText;
+        public TMPro.TextMeshProUGUI ArrowAmount;
 
         public UnityEvent OnArrowUpdate;
 

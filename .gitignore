@@ -72,3 +72,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 CemeteryBattle/Library
 CemeteryBattle/Temp
+CemeteryBattle/obj

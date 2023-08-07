@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 
 namespace PainfulTest.Manager
@@ -31,7 +32,7 @@ namespace PainfulTest.Manager
 
         public static UnityEvent RemoveEnemy;
 
-        public Text CountDownTimer;
+        public TMPro.TextMeshProUGUI CountDownTimer;
 
         private bool CanSpawn;
 
