@@ -21,6 +21,11 @@ namespace PainfulTest.Settings
         {
             SettingsAnim.SetTrigger(_triggerON);
         }
-       
+
+        public void ExitGame()
+        {
+            Application.Quit();
+        }
+
     }
 }
