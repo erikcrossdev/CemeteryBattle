@@ -419,7 +419,6 @@ RectTransform:
   - {fileID: 1032091534}
   - {fileID: 1083272670}
   - {fileID: 499361600}
-  - {fileID: 1194708438}
   - {fileID: 847140834}
   - {fileID: 2034160593}
   m_Father: {fileID: 97112314}
@@ -1868,8 +1867,9 @@ RectTransform:
   - {fileID: 1657075303}
   - {fileID: 1569159965}
   - {fileID: 1691781017}
+  - {fileID: 1194708438}
   m_Father: {fileID: 160354245}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2676,15 +2676,15 @@ RectTransform:
   m_GameObject: {fileID: 1194708437}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000035, y: 1.0000035, z: 1.0000035}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 160354245}
-  m_RootOrder: 6
+  m_Father: {fileID: 847140834}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -189.78561, y: -123.95705}
+  m_AnchoredPosition: {x: -247.7847, y: -9.999916}
   m_SizeDelta: {x: 310.5, y: 54.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1194708439
@@ -3171,7 +3171,7 @@ Transform:
   - {fileID: 1095543304}
   - {fileID: 875093982}
   m_Father: {fileID: 1915276779}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1392573087 stripped
 Transform:
@@ -4453,8 +4453,8 @@ Transform:
   m_Children:
   - {fileID: 1688344067}
   - {fileID: 1432676297}
-  - {fileID: 118529393}
   - {fileID: 1336573994}
+  - {fileID: 118529393}
   - {fileID: 111289554}
   - {fileID: 862252465}
   - {fileID: 1392573087}
@@ -4495,7 +4495,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 160354245}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4748,13 +4748,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4a79d65d93fd144a6eb8d24011c8b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialCountdown: {fileID: 2034160594}
-  CountDownSlider: {fileID: 847140835}
-  MusicSlider: {fileID: 1032091535}
-  SoundFXSlider: {fileID: 499361601}
-  _countdown: 0
-  SoundtrackMixer: {fileID: 24100000, guid: 6a6606e3b75b01044bfce1b43e7b49f6, type: 2}
-  SoundFXMixer: {fileID: 24100000, guid: 8002e555390e3fd4aa64afeca055e5c2, type: 2}
+  _initialCountdown: {fileID: 2034160594}
+  _countDownSlider: {fileID: 847140835}
+  _musicSlider: {fileID: 1032091535}
+  _soundFXSlider: {fileID: 499361601}
+  _countdown: 110
+  _soundtrackMixer: {fileID: 24100000, guid: 6a6606e3b75b01044bfce1b43e7b49f6, type: 2}
+  _soundFXMixer: {fileID: 24100000, guid: 8002e555390e3fd4aa64afeca055e5c2, type: 2}
 --- !u!1 &2143405694
 GameObject:
   m_ObjectHideFlags: 0

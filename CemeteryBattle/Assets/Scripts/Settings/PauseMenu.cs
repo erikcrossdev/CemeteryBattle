@@ -11,9 +11,9 @@ namespace PainfulTest.Settings
         {
             get; private set;
         }
-      
-        public GameObject PauseUI;
-        public GameObject QuitSubMenu;
+
+        [SerializeField] private GameObject _pauseUI;
+        [SerializeField] private GameObject _quitSubMenu;
         public bool IsPaused
         {
             get; private set;
@@ -27,7 +27,7 @@ namespace PainfulTest.Settings
         {
             QuitButtonActivation(false);
             IsPaused = false;
-            PauseUI.SetActive(IsPaused);
+            _pauseUI.SetActive(IsPaused);
             SetPauseActivation();
         }
 
@@ -43,7 +43,7 @@ namespace PainfulTest.Settings
         public void ResumePauseGame()
         {
             IsPaused = !IsPaused;
-            PauseUI.SetActive(IsPaused);
+            _pauseUI.SetActive(IsPaused);
             SetPauseActivation();
         }
 
@@ -65,7 +65,7 @@ namespace PainfulTest.Settings
 
         public void QuitButtonActivation(bool activation)
         {
-            QuitSubMenu.SetActive(activation);
+            _quitSubMenu.SetActive(activation);
         }
 
     }

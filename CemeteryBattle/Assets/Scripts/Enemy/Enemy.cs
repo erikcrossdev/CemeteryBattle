@@ -56,7 +56,7 @@ namespace PainfulTest.Enemy
         {
             _anim = GetComponent<Animator>();
             _agent = GetComponent<NavMeshAgent>();
-            _target = Player.FPSCharacterController.Instance.PlayerTransform;
+            _target = Player.FirstPersonCharacterController.Instance.transform;
             _source = GetComponent<AudioSource>();
            
             _canAttackPlayer = true;

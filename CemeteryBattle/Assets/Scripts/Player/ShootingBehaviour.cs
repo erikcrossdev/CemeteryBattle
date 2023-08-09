@@ -59,7 +59,7 @@ using UnityEngine;
                 if (Input.GetKeyDown(KeyCode.Mouse0) && _timer > Cadency && _currentAmmo > 0 && !Settings.PauseMenu.Instance.IsPaused)
                 {
                     _source.PlayOneShot(_shoot);
-                    Instantiate(_arrow, _bow.transform.position, _bow.transform.rotation);
+                    Instantiate(_arrow, _bow.transform.position, transform.rotation);
                     _currentAmmo--;
                     Manager.MatchManager.Instance.OnArrowUpdate.Invoke();
                     _timer = 0;

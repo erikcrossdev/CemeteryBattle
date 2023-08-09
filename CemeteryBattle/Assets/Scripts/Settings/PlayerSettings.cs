@@ -12,28 +12,28 @@ namespace PainfulTest.Settings
         [Header("Text Componets")]
         [Space(5)]
 
-        public Text InitialCountdown;
+        [SerializeField] private Text _initialCountdown;
 
         [Space(10)]
         [Header("Sliders Components")]
         [Space(10)]
 
-        public Slider CountDownSlider;
-        public Slider MusicSlider;
-        public Slider SoundFXSlider;
+        [SerializeField] private Slider _countDownSlider;
+        [SerializeField] private Slider _musicSlider;
+        [SerializeField] private Slider _soundFXSlider;
 
         [Space(5)]
         [Header("Default Values")]
         [Space(10)]
-        [SerializeField, Range(60, 110)]
+        [SerializeField, Range(60, 180)]
         private float _countdown;
 
         [Space(5)]
         [Header("Audio Mixers")]
         [Space(10)]
 
-        public AudioMixer SoundtrackMixer;
-        public AudioMixer SoundFXMixer;
+        [SerializeField] private AudioMixer _soundtrackMixer;
+        [SerializeField] private AudioMixer _soundFXMixer;
 
         void Start()
         {
@@ -53,11 +53,11 @@ namespace PainfulTest.Settings
 
             if (PlayerPrefs.HasKey("Timer"))
             {
-                CountDownSlider.value = _countdown = PlayerPrefs.GetFloat("Timer");
+                _countDownSlider.value = _countdown = PlayerPrefs.GetFloat("Timer");
             }
 
-            MusicSlider.value = GlobalSettings.GlobalMusicVolume;
-            SoundFXSlider.value = GlobalSettings.GlobalSoundFXVolume;
+            _musicSlider.value = GlobalSettings.GlobalMusicVolume;
+            _soundFXSlider.value = GlobalSettings.GlobalSoundFXVolume;
 
             #endregion
             Cursor.visible = true;
@@ -67,25 +67,25 @@ namespace PainfulTest.Settings
 
         public void OnInitialCountdownSliderChange()
         {
-            _countdown = CountDownSlider.value;
+            _countdown = _countDownSlider.value;
             string minutes = Mathf.Floor(_countdown / 60).ToString("00");
             string seconds = Mathf.Floor(_countdown % 60).ToString("00");
-            InitialCountdown.text = string.Concat(minutes, ":", seconds);
+            _initialCountdown.text = string.Concat(minutes, ":", seconds);
             PlayerPrefs.SetFloat("Timer", _countdown);
         }
 
         public void OnMusicSliderChange()
         {
-            PlayerPrefs.SetFloat("MusicVolume", MusicSlider.value);
-            GlobalSettings.GlobalMusicVolume = MusicSlider.value;
-            SoundtrackMixer.SetFloat("SoundtrackVolume", GlobalSettings.GlobalMusicVolume);
+            PlayerPrefs.SetFloat("MusicVolume", _musicSlider.value);
+            GlobalSettings.GlobalMusicVolume = _musicSlider.value;
+            _soundtrackMixer.SetFloat("SoundtrackVolume", GlobalSettings.GlobalMusicVolume);
         }
 
         public void OnSoundFXSliderChange()
         {
-            PlayerPrefs.SetFloat("SoundFXVolume", MusicSlider.value);
-            GlobalSettings.GlobalSoundFXVolume = SoundFXSlider.value;
-            SoundFXMixer.SetFloat("SoundFXVolume", GlobalSettings.GlobalSoundFXVolume);
+            PlayerPrefs.SetFloat("SoundFXVolume", _musicSlider.value);
+            GlobalSettings.GlobalSoundFXVolume = _soundFXSlider.value;
+            _soundFXMixer.SetFloat("SoundFXVolume", GlobalSettings.GlobalSoundFXVolume);
         }
 
     }

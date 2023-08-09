@@ -27,7 +27,7 @@ namespace PainfulTest.Enemy
         public void Shoot()
         {
             _stats.PlayRandomSFX(_source, _stats.AttackSound);
-            Instantiate(_arrow, _bow.transform.position, _bow.transform.rotation);
+            Instantiate(_arrow, _bow.transform.position, transform.rotation);
         }
 
         private IEnumerator AttackPlayerRoutine()

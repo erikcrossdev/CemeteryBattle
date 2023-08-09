@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 
 namespace PainfulTest.Manager
@@ -14,14 +15,14 @@ namespace PainfulTest.Manager
 
         private const string _triggerOn = "On";
 
-        [Header("Text Componets")]
+        [Header("Text Components")]
         [Space(5)]
 
 
-        public Text GameOverLabel;
-        public Text ScoreText;
-        public Text EnemiesKilledText;
-        public Text HighScoreText;
+        [SerializeField] private TMPro.TextMeshProUGUI _gameOverLabel;
+        [SerializeField] private TMPro.TextMeshProUGUI _scoreText;
+        [SerializeField] private TMPro.TextMeshProUGUI _enemiesKilledText;
+        [SerializeField] private TMPro.TextMeshProUGUI _highScoreText;
 
         private void Awake()
         {
@@ -38,17 +39,17 @@ namespace PainfulTest.Manager
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             if (MatchManager.Instance.Timer <= 0) {
-                GameOverLabel.text = "Time's up!";
+                _gameOverLabel.text = "Time's up!";
             }
             if (Player.PlayerHealth.Instance.CurrentHealth <= 0) {
-                GameOverLabel.text = "You died!";
+                _gameOverLabel.text = "You died!";
             }
 
-            ScoreText.text = PainfulTest.Manager.ScoreManager.Instance.CurrentScore.ToString();
-            EnemiesKilledText.text= PainfulTest.Manager.ScoreManager.Instance.EnemiesKilled.ToString();
+            _scoreText.text = PainfulTest.Manager.ScoreManager.Instance.CurrentScore.ToString();
+            _enemiesKilledText.text= PainfulTest.Manager.ScoreManager.Instance.EnemiesKilled.ToString();
             if (!PlayerPrefs.HasKey("HighScore"))
             {
-                HighScoreText.text = PainfulTest.Manager.ScoreManager.Instance.CurrentScore.ToString();
+                _highScoreText.text = PainfulTest.Manager.ScoreManager.Instance.CurrentScore.ToString();
                 PlayerPrefs.SetInt("HighScore", PainfulTest.Manager.ScoreManager.Instance.CurrentScore);
             }
             else {
@@ -56,7 +57,7 @@ namespace PainfulTest.Manager
                 {
                     PlayerPrefs.SetInt("HighScore", PainfulTest.Manager.ScoreManager.Instance.CurrentScore);
                 }
-                    HighScoreText.text = PlayerPrefs.GetInt("HighScore").ToString();
+                    _highScoreText.text = PlayerPrefs.GetInt("HighScore").ToString();
                
             }
 

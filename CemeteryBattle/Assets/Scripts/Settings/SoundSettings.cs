@@ -8,13 +8,13 @@ namespace PainfulTest.Settings
 {
     public class SoundSettings : MonoBehaviour
     {
-        public AudioMixer SoundFXMixer;
-        public AudioMixer SoundtrackMixer;
+        [SerializeField] private AudioMixer _soundFXMixer;
+        [SerializeField] private AudioMixer _soundtrackMixer;
 
         private void Start()
         {
-            SoundFXMixer.SetFloat("SoundFXVolume", GlobalSettings.GlobalSoundFXVolume);
-            SoundtrackMixer.SetFloat("SoundtrackVolume", GlobalSettings.GlobalMusicVolume);
+            _soundFXMixer.SetFloat("SoundFXVolume", GlobalSettings.GlobalSoundFXVolume);
+            _soundtrackMixer.SetFloat("SoundtrackVolume", GlobalSettings.GlobalMusicVolume);
         }
     }
 }
