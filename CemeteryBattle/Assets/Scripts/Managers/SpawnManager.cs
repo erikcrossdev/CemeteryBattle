@@ -27,7 +27,7 @@ namespace PainfulTest.Manager
         private float StartConterTime;
         private float _startTimer;
 
-        [SerializeField] private List<GameObject> _spawnPoints = new List<GameObject>();
+        [SerializeField] private List<SpawnPoint> _spawnPoints = new List<SpawnPoint>();
 
         public static UnityEvent RemoveEnemy;
 
@@ -77,10 +77,12 @@ namespace PainfulTest.Manager
                 if (_currentEnemiesInstantiated <= _maxEnemiesInstantiated && CanSpawn)
                 {
                     yield return new WaitForSeconds(_instantiateTimer);
+                    int randomSpawnPoint = Random.Range(0, _spawnPoints.Count);
                     Enemy.Enemy enemy = Instantiate(_enemies[Random.Range(0, _enemies.Count)],
-                     _spawnPoints[Random.Range(0, _spawnPoints.Count)].transform.position,
-                     _spawnPoints[Random.Range(0, _spawnPoints.Count)].transform.rotation);
+                     _spawnPoints[randomSpawnPoint].transform.position,
+                     _spawnPoints[randomSpawnPoint].transform.rotation);
                     EnemiesInstantiated.Add(enemy);
+                    _spawnPoints[randomSpawnPoint].PlayParticle();
                     _currentEnemiesInstantiated++;
                 }
                 yield return null;

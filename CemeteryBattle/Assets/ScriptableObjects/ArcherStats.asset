@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cooldownAttack: 3
   _maxDistance: 5
-  _speed: 8
+  _speed: 7.5
   _maxLife: 7
   _playerArrowDamage: 1
   _percentageChanceToDropItem: 75

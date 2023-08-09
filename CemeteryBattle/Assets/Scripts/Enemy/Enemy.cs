@@ -93,25 +93,6 @@ namespace PainfulTest.Enemy
                     _currentSpeed = _agent.velocity.magnitude;
                     _anim.SetFloat(_triggerWalk, _currentSpeed);
                 }
-                /*
-                else {
-                    Vector3 lineOfSight = transform.position + new Vector3(0, 1.2f, 0);
-                    Vector3 forward = transform.TransformDirection(Vector3.forward);
-                    Debug.DrawRay(lineOfSight, forward, Color.red);
-                    Ray ray = new Ray(lineOfSight, forward);
-                    RaycastHit hitData;
-                    if (Physics.Raycast(ray, out hitData, Mathf.Infinity, ~0)) {
-                        if (hitData.collider.CompareTag(Settings.TagManager.PlayerTag))
-                        {
-                            Debug.Log("HIT PLAYER!!!!!!!");
-                        }
-                        else {
-                            Debug.Log($"Not Hitting player, enemy {gameObject.name} should move");
-                        }
-                        
-                     }
-                    
-                }*/
             }
         }
 
