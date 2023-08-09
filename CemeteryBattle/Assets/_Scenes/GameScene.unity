@@ -23694,13 +23694,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2898947015851132308, guid: debb8fd04dec2a0449cdcf6ef2aa4d0b,
         type: 3}
-      propertyPath: _initialAmmo
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 2898947015851132308, guid: debb8fd04dec2a0449cdcf6ef2aa4d0b,
-        type: 3}
-      propertyPath: _packAmmoValue
-      value: 20
+      propertyPath: Cadency
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2898947015851132311, guid: debb8fd04dec2a0449cdcf6ef2aa4d0b,
         type: 3}

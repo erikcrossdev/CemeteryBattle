@@ -337,9 +337,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 244a0a97bed30bb45be92cbe944967ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialAmmo: 25
-  _packAmmoValue: 15
-  Cadency: 0.1
+  _initialAmmo: 45
+  _packAmmoValue: 20
+  Cadency: 0.4
   _bow: {fileID: 2898947016150772635}
   _arrow: {fileID: 1727054834963518, guid: 3755887147502d04e92ff208899aab04, type: 3}
   _shoot: {fileID: 8300000, guid: 1a462c868f3da5646860e663db335e5b, type: 3}

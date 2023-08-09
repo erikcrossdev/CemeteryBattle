@@ -137,6 +137,7 @@ namespace PainfulTest.Enemy
             if (collision.gameObject.CompareTag(Settings.TagManager.PlayerArrowTag))
             {
                 TakeDamage();
+                Destroy(collision.gameObject, 0.1f);
             }
         }
 
