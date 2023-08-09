@@ -35,7 +35,6 @@ namespace PainfulTest.Manager
                 Debug.LogError("Setting float to 180 ");
             }
             _timer = PlayerPrefs.GetFloat("Timer");
-            Debug.LogError("Timer from player prefs is " + PlayerPrefs.GetFloat("Timer"));
 
             OnArrowUpdate.AddListener(UpdateUI);
 

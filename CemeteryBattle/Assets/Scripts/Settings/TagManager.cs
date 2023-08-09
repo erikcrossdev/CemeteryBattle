@@ -10,5 +10,6 @@ namespace PainfulTest.Settings
         public static string PropsTag = "Props";
         public static string EnemyArrowTag = "EnemyArrow";
         public static string PlayerArrowTag = "Arrow";
+        public static string PlayerTag = "Player";
     }
 }

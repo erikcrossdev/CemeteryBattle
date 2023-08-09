@@ -14,6 +14,8 @@ namespace PainfulTest.Enemy
         [SerializeField] private float _maxDistance;
         public float MaxDistance => _maxDistance;
 
+        [SerializeField, Range(5, 15)] private float _speed;
+        public float Speed => _speed;
 
         [SerializeField, Range(5, 10)]
         private int _maxLife = 5;
@@ -37,19 +39,6 @@ namespace PainfulTest.Enemy
         [SerializeField] private AudioClip[] _damageSounds;
         public AudioClip[] DamageSounds => _damageSounds;
         #endregion
-
-
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
 
         public void PlayRandomSFX(AudioSource source, AudioClip[] list) {
             int randIndex = Random.Range(0, list.Length);
